@@ -1,0 +1,25 @@
+{% extends "shared/base.html" %}
+
+{% block subtitulo %}Tema{% endblock %}
+
+{% block conteudo %}
+
+<h1>Escolha Seu modo de Visualização</h1><hr>
+
+<Form action="/post_tema" method="post">
+    <div class="form-floating mb-3">
+        <select name="tema" id="tema" class="form-control">
+            <option value="">Padrão</option>
+            {% for t in temas: %}
+            <option value="{{t}}" {{ 'selected' if t == tema_selecionado }}>{{t|capitalize}}</option>
+            {% endfor %}
+        </select>
+        <label for="tema">Tema</label>
+    </div>   
+</Form>
+<script>
+    document.getElementById("tema").addEventListener("change", function(){
+        document.getElementById("tema").form.submit();
+    });
+</script>
+{% endblock %}
