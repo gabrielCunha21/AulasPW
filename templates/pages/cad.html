@@ -1,0 +1,52 @@
+{% extends 'shared/base_publica.html'%}
+
+{% block subtitulo %}Cadastrar{% endblock %}
+
+{% block conteudo %}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <form action="/post_cadastrar" method="post">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Conte-me seus segredos</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                        <label for="nome">Nome</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                        <label for="email">E-mail</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone">
+                        <label for="telefone">E-mail</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                        <label for="senha">Senha</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input type="password" class="form-control" id="confsenha" name="confsenha" placeholder="Confirme a Senha">
+                        <label for="confsenha">Confirme a Senha</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <select class="form-control" name="perfil" id="perfil">
+                            <option value="1">Grau 1</option>
+                            <option value="2">Grau 2</option>
+                        <label for="perfil">Grau</label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Sua escolha</button>
+                    <div>
+                        É menbro? <a href="/">Clique aqui</a> Para obter a luz.
+                    </div>
+                </div>               
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

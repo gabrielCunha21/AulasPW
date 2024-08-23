@@ -1,0 +1,40 @@
+{% extends 'shared/base_publica.html'%}
+
+{% block subtitulo %}entrar{% endblock %}
+
+{% block conteudo %}
+
+<center>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaHoMIkS29-TdqcTFOn5ghQ5X7tYCiz66kiw&s">
+</center>
+<hr>
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <form action="/post_entrar" method="post">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Login</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                        <label for="email">E-mail</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                        <label for="senha">Senha</label>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Entrar</button>
+                </div>
+                <div>
+                    Não é menbro? <a href="/cadastrar">Clique aqui</a> Para se filiar a noite de segredos.
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
