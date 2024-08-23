@@ -9,7 +9,6 @@
 <Form action="/post_tema" method="post">
     <div class="form-floating mb-3">
         <select name="tema" id="tema" class="form-control">
-            <option value="">Padrão</option>
             {% for t in temas: %}
             <option value="{{t}}" {{ 'selected' if t == tema_selecionado }}>{{t|capitalize}}</option>
             {% endfor %}
