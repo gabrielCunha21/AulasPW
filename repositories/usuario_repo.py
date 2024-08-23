@@ -58,3 +58,12 @@ class UsuarioRepo:
                 cursor = db.cursor()
                 resultado = cursor.execute(SQL_EXCLUIR_USUARIO, (email,))
                 return resultado.rowcount > 0
+            
+    
+    @classmethod
+    def obter_perfil(cls, email: str) -> int:
+        with obter_conexao() as db:
+            cursor = db.cursor()
+            resultado = cursor.execute(
+                SQL_OBTER_PERFIL, (email,))
+            return resultado.fetchone()[0]

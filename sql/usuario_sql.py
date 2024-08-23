@@ -35,3 +35,9 @@ SQL_ATUALIZAR_TEMA = """UPDATE usuario
 SQL_EXCLUIR_USUARIO = """DELETE FROM usuario
     WHERE email = ?"""
 
+SQL_OBTER_PERFIL = """
+    SELECT perfil
+    FROM usuario
+    WHERE email = ?
+"""
+

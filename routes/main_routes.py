@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 
 from models.usuario_model import Usuario
 from repositories.usuario_repo import UsuarioRepo
+from util.auth import NOME_COOKIE_AUTH, criar_token, obter_hash_senha
 
 router = APIRouter()
 
@@ -12,6 +13,23 @@ templates =Jinja2Templates(directory="templates")
 @router.get("/")
 async def get_root(request: Request):
     return templates.TemplateResponse("pages/entrar.html", {"request":request})
+
+@router.post("/post_entrar")
+async def post_entrar(
+    email: str = Form(...),
+    senha: str = Form(...)):
+    if not UsuarioRepo.checar_credenciais(email, obter_hash_senha(senha)):
+        response = RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
+    token = criar_token(email, UsuarioRepo.obter_perfil(email))
+    response = RedirectResponse("/tema", status_code=status.HTTP_303_SEE_OTHER)
+    response.set_cookie(
+        key=NOME_COOKIE_AUTH,
+        value=token,
+        max_age=3600*24*365*10,
+        httponly=True,
+        samesite="lax"
+    )
+    return response
 
 @router.post("/post_cadastrar")
 async def post_cadastrar(
@@ -23,7 +41,8 @@ async def post_cadastrar(
     perfil: str = Form(...),):
     if senha != confsenha:
         return RedirectResponse("/cadastrar", status_code=status.HTTP_303_SEE_OTHER)
-    usuario = Usuario(None, nome, email, telefone, senha, None, None, perfil)
+    senha_hash = obter_hash_senha(senha)
+    usuario = Usuario(None, nome, email, telefone, senha_hash, None, None, perfil)
     UsuarioRepo.inserir_usuario(usuario)
     return RedirectResponse("/", status_code=status.HTTP_303_SEE_OTHER)
 

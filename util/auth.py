@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from datetime import timedelta
 import os
 import bcrypt
 from fastapi import HTTPException, Request, status
@@ -47,7 +48,7 @@ def criar_token(email: str, perfil: int) -> str:
     payload = {
         "email": email,
         "perfil": perfil,
-        "exp": datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=20)
+        "exp": datetime.now(datetime.timezone.utc) + timedelta(seconds=20)
     }
     return jwt.encode(payload, 
         os.getenv("JWT_SECRET"),
